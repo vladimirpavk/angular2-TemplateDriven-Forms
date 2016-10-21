@@ -9,6 +9,12 @@ var gulpSm = require('gulp-sourcemaps');
 var gulpClean = require('gulp-clean');
 
 var browserSync = require('browser-sync');
+  console.log("Initiating browser sync configuration...");
+    browserSync.init(
+        {
+        proxy: "http://localhost:3036/angular"                       
+        }
+    );
 
 var nodemon = require('gulp-nodemon');
 
@@ -20,7 +26,7 @@ var nodemon = require('gulp-nodemon');
 
 gulp.task('clean_server_app_dir', function(){
     console.log("Cleaning server/js/*");
-    return gulp.src(['./server/js/*'], {read:false})
+    return gulp.src(['./server/js/**/*'], {read:false})
         .pipe(gulpClean());
 });
 
@@ -59,17 +65,12 @@ gulp.task('watch_server', ['watch_server_changes'], function(){
 
 gulp.task('clean_client_app_dir', function(){
     console.log("Cleaning client/app/js/*");
-    return gulp.src(['./client/app/js/*'], {read:false})
+    return gulp.src(['./client/app/js/**/*'], {read:false})
         .pipe(gulpClean());
 });
 
 gulp.task('compile_client_app', ['clean_client_app_dir'], function(){
-    console.log("Initiating browser sync configuration...");
-    browserSync.init(
-        {
-        proxy: "http://localhost:3036/angular"                       
-        }
-    );
+  
 
     console.log('Compiling client application...');
     return gulp.src(['./client/app/ts/**/*.ts'])
@@ -84,12 +85,17 @@ gulp.task('browser_sync', ['compile_client_app'], function(){
 });
 
 gulp.task('watch_client', ['compile_client_app'], function(){
-    return gulp.watch(['./client/app/ts/*.ts'], ['browser_sync']);
+    return gulp.watch(['./client/app/ts/**/*.ts'], ['browser_sync']);
 });
+
+gulp.task('watch_client_html', function(){
+    console.log("Watching /client/app/ts/**/*.html");
+    return gulp.watch(['./client/app/ts/**/*.html'], ['browser_sync']);
+})
 
 //******************************************************************************
 
-gulp.task('default', ['watch_server', 'watch_client'], function() {
+gulp.task('default', ['watch_server', 'watch_client', 'watch_client_html'], function() {
     console.log("Watching all...");
 });
 

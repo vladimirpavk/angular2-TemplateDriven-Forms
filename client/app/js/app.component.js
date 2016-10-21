@@ -19,11 +19,14 @@ System.register(['@angular/core'], function(exports_1, context_1) {
             }],
         execute: function() {
             let AppComponent = class AppComponent {
+                submit(form_value) {
+                    console.log(form_value);
+                }
             };
             AppComponent = __decorate([
                 core_1.Component({
                     selector: 'my-app',
-                    template: '<h1>My Second Angular App</h1>'
+                    templateUrl: './client/app/ts/app.component.html'
                 }), 
                 __metadata('design:paramtypes', [])
             ], AppComponent);

@@ -2,6 +2,13 @@
 import { Component } from '@angular/core';
 @Component({
   selector: 'my-app',
-  template: '<h1>My Second Angular App</h1>'
+  templateUrl: './client/app/ts/app.component.html'
 })
-export class AppComponent { }
+export class AppComponent { 
+
+  public username:string;
+
+  public submit(form_value:any):void{
+    console.log(form_value);
+  }
+}
