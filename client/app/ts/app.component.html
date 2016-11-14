@@ -1,36 +1,30 @@
-<form #formref="ngForm" (ngSubmit)="submit(formref.value)">
-    <label>username :</label>
-    <input type="month" name="username" [(ngModel)]="username">
-    {{username}}
-    <div style="display: block"></div>
+<form>
+    <div class="container">
+    <h1>Hero Form</h1>
+    <form (ngSubmit)="clickSubmit(forma)" #forma="ngForm">
+     {{diagnostic}}
+        <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name"
+                required
+                [(ngModel)]="model.name" name="name" #spy="ngModel">{{spy.valid}}
+                       </div>
+        <div class="form-group">
+        <label for="alterEgo">Alter Ego</label>
+        <input type="text"  class="form-control" id="alterEgo"
+                [(ngModel)]="model.alterEgo" name="alterEgo">
+        </div>
+        <div class="form-group">
+        <label for="power">Hero Power</label>
+        <select class="form-control"  id="power"
+                required
+                [(ngModel)]="model.power" name="power">
+            <option *ngFor="let p of powers" [value]="p">{{p}}</option>
+        </select>
+        </div>
 
-    <label>password :</label>
-    <input type="password" name="password" ngModel>
-    <div style="display: block"></div>
 
-    <label>re-type password</label>
-    <input type="password" name="password2" ngModel>
-    <div style="display: block"></div>
-
-    <label>First name :</label>
-    <input type="text" name="first_name" ngModel>
-    <div style="display: block"></div>
-
-    <label>Lastname :</label>
-    <input type="text" name="last_name" ngModel>
-    <div style="display: block"></div>
-
-    <label>Address :</label>
-    <input type="text" name="address" ngModel>
-    <div style="display: block"></div>
-
-    <label>City :</label>
-    <input type="text" name="city" ngModel>
-    <div style="display: block"></div>
-
-    <label>Zip :</label>
-    <input type="number" name="zip" ngModel>
-    <div style="display: block"></div>
-
-    <button type="submit">Submit form</button>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
 </form>
